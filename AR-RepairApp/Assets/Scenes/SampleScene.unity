@@ -1206,7 +1206,7 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 2512387470528047719, guid: 48cb3fb68c91eb94999fd99957eb0cae,
         type: 3}
       insertIndex: -1
-      addedObject: {fileID: 408664553}
+      addedObject: {fileID: 408664558}
   m_SourcePrefab: {fileID: 100100000, guid: 48cb3fb68c91eb94999fd99957eb0cae, type: 3}
 --- !u!114 &331264286 stripped
 MonoBehaviour:
@@ -1321,7 +1321,7 @@ MonoBehaviour:
   m_MaxNumberOfMovingImages: 1
   m_TrackedImagePrefab: {fileID: 919132149155446097, guid: ce1b8132524db4465932ac543608a96a,
     type: 3}
---- !u!114 &408664553
+--- !u!114 &408664558
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1330,10 +1330,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 408664547}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 314e9871befdd4da9a671fbf698519a5, type: 3}
+  m_Script: {fileID: 11500000, guid: 28d748b1c5f0a4ff38d2d6eb6ca71f82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trackedImageManager: {fileID: 408664552}
 --- !u!1 &425410336
 GameObject:
   m_ObjectHideFlags: 0
