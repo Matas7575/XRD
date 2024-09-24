@@ -1203,6 +1203,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 408664552}
+    - targetCorrespondingSourceObject: {fileID: 2512387470528047719, guid: 48cb3fb68c91eb94999fd99957eb0cae,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 408664553}
   m_SourcePrefab: {fileID: 100100000, guid: 48cb3fb68c91eb94999fd99957eb0cae, type: 3}
 --- !u!114 &331264286 stripped
 MonoBehaviour:
@@ -1312,11 +1316,24 @@ MonoBehaviour:
   <trackablesChanged>k__BackingField:
     m_PersistentCalls:
       m_Calls: []
-  m_SerializedLibrary: {fileID: 11400000, guid: 86005f26f0e9aa74db2d6ff953a17c4b,
+  m_SerializedLibrary: {fileID: 11400000, guid: 1257da66a20d74d20b8ee55b509d2320,
     type: 2}
   m_MaxNumberOfMovingImages: 1
-  m_TrackedImagePrefab: {fileID: 919132149155446097, guid: 0ad2a846920d9bc4ea9f5d345374ee1f,
+  m_TrackedImagePrefab: {fileID: 919132149155446097, guid: ce1b8132524db4465932ac543608a96a,
     type: 3}
+--- !u!114 &408664553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 408664547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 314e9871befdd4da9a671fbf698519a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  trackedImageManager: {fileID: 408664552}
 --- !u!1 &425410336
 GameObject:
   m_ObjectHideFlags: 0
@@ -4942,6 +4959,74 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
+--- !u!1001 &1218965007
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: ce1b8132524db4465932ac543608a96a,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1.4715278
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ce1b8132524db4465932ac543608a96a,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.03584545
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ce1b8132524db4465932ac543608a96a,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.61986744
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ce1b8132524db4465932ac543608a96a,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.0064788815
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ce1b8132524db4465932ac543608a96a,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.999979
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ce1b8132524db4465932ac543608a96a,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ce1b8132524db4465932ac543608a96a,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ce1b8132524db4465932ac543608a96a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -180.742
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ce1b8132524db4465932ac543608a96a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: ce1b8132524db4465932ac543608a96a,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: ce1b8132524db4465932ac543608a96a,
+        type: 3}
+      propertyPath: m_Name
+      value: lenovo-legion-5-16-inch
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ce1b8132524db4465932ac543608a96a, type: 3}
 --- !u!1 &1262986090
 GameObject:
   m_ObjectHideFlags: 0
@@ -8612,3 +8697,4 @@ SceneRoots:
   - {fileID: 1323550134}
   - {fileID: 2099970469}
   - {fileID: 331264285}
+  - {fileID: 1218965007}
