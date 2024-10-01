@@ -551,7 +551,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &173779101
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1316,10 +1316,10 @@ MonoBehaviour:
   <trackablesChanged>k__BackingField:
     m_PersistentCalls:
       m_Calls: []
-  m_SerializedLibrary: {fileID: 11400000, guid: 1257da66a20d74d20b8ee55b509d2320,
+  m_SerializedLibrary: {fileID: 11400000, guid: ac2efe893e3b9b047a99cfeb65d013a0,
     type: 2}
   m_MaxNumberOfMovingImages: 1
-  m_TrackedImagePrefab: {fileID: 919132149155446097, guid: ce1b8132524db4465932ac543608a96a,
+  m_TrackedImagePrefab: {fileID: 4901485480744798870, guid: 2d6a54021e06d724d99225cac1c40b37,
     type: 3}
 --- !u!114 &408664558
 MonoBehaviour:
@@ -1880,6 +1880,18 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Continue Button
+      objectReference: {fileID: 0}
+    - target: {fileID: 5779608150239002450, guid: 063cc896506b947c7b2c2ae3beb5868f,
+        type: 3}
+      propertyPath: m_text
+      value: 'Welcome to Laptop Repair AR.
+
+        Let''s get started.'
+      objectReference: {fileID: 0}
+    - target: {fileID: 5779608150239002450, guid: 063cc896506b947c7b2c2ae3beb5868f,
+        type: 3}
+      propertyPath: m_ActiveFontFeatures.Array.size
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5865099264268480235, guid: 063cc896506b947c7b2c2ae3beb5868f,
         type: 3}
@@ -4099,7 +4111,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1059051468
 RectTransform:
   m_ObjectHideFlags: 0
