@@ -15,169 +15,90 @@ public class DeviceDisassembly : MonoBehaviour
 
     public DisassemblyState currentState = DisassemblyState.Idle;
 
-    public Button idleButton;
-    public Button screwsOutButton;
-    public Button capOffButton;
-    public Button batteryOutButton;
-    public Button ramOutButton;
-    public Button ssdOutButton;
+    public Button leftButton;
+    public Button rightButton;
+    public Animator animator;
 
     void Start()
     {
-        idleButton.onClick.AddListener(() => ChangeState(DisassemblyState.ScrewsOut));
-        screwsOutButton.onClick.AddListener(() => ChangeState(DisassemblyState.CapOff));
-        capOffButton.onClick.AddListener(() => ChangeState(DisassemblyState.CapOff));
-
-        batteryOutButton.onClick.AddListener(() => ChangeState(DisassemblyState.BatteryOut));
-        ramOutButton.onClick.AddListener(() => ChangeState(DisassemblyState.RamOut));
-        ssdOutButton.onClick.AddListener(() => ChangeState(DisassemblyState.SSDOut));
-
-        SetInitialButtonState();
+        leftButton.onClick.AddListener(() => MoveToPreviousState());
+        rightButton.onClick.AddListener(() => MoveToNextState());
+        
+        UpdateButtons();
     }
 
-    void SetInitialButtonState()
-    {
-        idleButton.interactable = true;
-        screwsOutButton.interactable = false;
-        capOffButton.interactable = false;
-
-        batteryOutButton.gameObject.SetActive(false);
-        ramOutButton.gameObject.SetActive(false);
-        ssdOutButton.gameObject.SetActive(false);
-    }
-
-    void ChangeState(DisassemblyState newState)
+    void MoveToNextState()
     {
         switch (currentState)
         {
             case DisassemblyState.Idle:
-                if (newState == DisassemblyState.ScrewsOut)
-                {
-                    currentState = DisassemblyState.ScrewsOut;
-                    OnEnterScrewsOut();
-                    UpdateButtons();
-                }
+                ChangeState(DisassemblyState.ScrewsOut, "ScrewsOut");
                 break;
 
             case DisassemblyState.ScrewsOut:
-                if (newState == DisassemblyState.CapOff || newState == DisassemblyState.Idle)
-                {
-                    currentState = newState;
-                    if (newState == DisassemblyState.CapOff)
-                    {
-                        OnEnterCapOff();
-                    }
-                    else
-                    {
-                        OnEnterIdle();
-                    }
-                    UpdateButtons();
-                }
+                ChangeState(DisassemblyState.CapOff, "CapOff");
                 break;
 
             case DisassemblyState.CapOff:
-                if (newState == DisassemblyState.ScrewsOut)
-                {
-                    currentState = DisassemblyState.ScrewsOut;
-                    OnEnterScrewsOut();
-                    UpdateButtons();
-                }
-                else if (newState == DisassemblyState.BatteryOut || newState == DisassemblyState.RamOut || newState == DisassemblyState.SSDOut)
-                {
-                    currentState = newState;
-                    if (newState == DisassemblyState.BatteryOut) OnEnterBatteryOut();
-                    if (newState == DisassemblyState.RamOut) OnEnterRamOut();
-                    if (newState == DisassemblyState.SSDOut) OnEnterSSDOut();
-                    UpdateButtons();
-                }
+                ChangeState(DisassemblyState.BatteryOut, "BatteryOut");
                 break;
 
             case DisassemblyState.BatteryOut:
+                ChangeState(DisassemblyState.RamOut, "RamOut");
+                break;
+
             case DisassemblyState.RamOut:
+                ChangeState(DisassemblyState.SSDOut, "SsdOut");
+                break;
+
             case DisassemblyState.SSDOut:
-                if (newState == DisassemblyState.CapOff)
-                {
-                    currentState = DisassemblyState.CapOff;
-                    OnEnterCapOff();
-                    UpdateButtons();
-                }
+                // Optional: Loop back to Idle or disable the right button.
                 break;
         }
+    }
+
+    void MoveToPreviousState()
+    {
+        switch (currentState)
+        {
+            case DisassemblyState.ScrewsOut:
+                ChangeState(DisassemblyState.Idle, "ScrewsIn");
+                break;
+
+            case DisassemblyState.CapOff:
+                ChangeState(DisassemblyState.ScrewsOut, "CapIn");
+                break;
+
+            case DisassemblyState.BatteryOut:
+                ChangeState(DisassemblyState.CapOff, "BatteryIn");
+                break;
+
+            case DisassemblyState.RamOut:
+                ChangeState(DisassemblyState.BatteryOut, "RamIn");
+                break;
+
+            case DisassemblyState.SSDOut:
+                ChangeState(DisassemblyState.RamOut, "SsdIn");
+                break;
+
+            case DisassemblyState.Idle:
+                // Optional: Loop back to SSDOut or disable the left button.
+                break;
+        }
+    }
+
+    void ChangeState(DisassemblyState newState, string trigger)
+    {
+        currentState = newState;
+        animator.SetTrigger(trigger);
+        UpdateButtons();
     }
 
     // Function to update the buttons' states based on the current phase
     void UpdateButtons()
     {
-        idleButton.interactable = false;
-        screwsOutButton.interactable = false;
-        capOffButton.interactable = false;
-        batteryOutButton.interactable = false;
-        ramOutButton.interactable = false;
-        ssdOutButton.interactable = false;
-
-        switch (currentState)
-        {
-            case DisassemblyState.Idle:
-                idleButton.interactable = true;
-                screwsOutButton.interactable = false;
-                capOffButton.interactable = false;
-                break;
-
-            case DisassemblyState.ScrewsOut:
-                idleButton.interactable = true;
-                screwsOutButton.interactable = true;
-                capOffButton.interactable = false;
-                break;
-
-            case DisassemblyState.CapOff:
-                screwsOutButton.interactable = true;
-                capOffButton.interactable = true;
-                
-                // Show and enable the component buttons (Battery, RAM, SSD)
-                batteryOutButton.gameObject.SetActive(true);
-                ramOutButton.gameObject.SetActive(true);
-                ssdOutButton.gameObject.SetActive(true);
-
-                batteryOutButton.interactable = true;
-                ramOutButton.interactable = true;
-                ssdOutButton.interactable = true;
-                break;
-
-            case DisassemblyState.BatteryOut:
-            case DisassemblyState.RamOut:
-            case DisassemblyState.SSDOut:
-                capOffButton.interactable = true;
-                break;
-        }
-    }
-
-    void OnEnterIdle()
-    {
-        Debug.Log("Entered Idle state");
-    }
-
-    void OnEnterScrewsOut()
-    {
-        Debug.Log("Entered Screws Out state");
-    }
-
-    void OnEnterCapOff()
-    {
-        Debug.Log("Entered Cap Off state");
-    }
-
-    void OnEnterBatteryOut()
-    {
-        Debug.Log("Entered Battery Out state");
-    }
-
-    void OnEnterRamOut()
-    {
-        Debug.Log("Entered RAM Out state");
-    }
-
-    void OnEnterSSDOut()
-    {
-        Debug.Log("Entered SSD Out state");
+        // Enable or disable left/right buttons based on the current state
+        leftButton.interactable = currentState != DisassemblyState.Idle;
+        rightButton.interactable = currentState != DisassemblyState.SSDOut;
     }
 }
