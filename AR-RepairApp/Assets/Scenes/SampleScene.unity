@@ -1336,7 +1336,19 @@ MonoBehaviour:
   currentState: 0
   leftButton: {fileID: 1293706991}
   rightButton: {fileID: 1397982901}
-  animator: {fileID: 0}
+  idlePrefab: {fileID: 5340046948619758595, guid: 8fa573d7415672246a580c987306c829,
+    type: 3}
+  screwsOutPrefab: {fileID: 3745077401794268768, guid: 857f3518f9b05cb479631fa28a422032,
+    type: 3}
+  capOffPrefab: {fileID: 5463784981125184411, guid: a4f857a9e7f23a749b63150232ae5522,
+    type: 3}
+  batteryOutPrefab: {fileID: 6610779394617960286, guid: 892a5245d7bb893439b79d4331d90eeb,
+    type: 3}
+  ramOutPrefab: {fileID: 4657454636223595027, guid: 1a3822e0ae1a5fc49bd4b0f46dbf6453,
+    type: 3}
+  ssdOutPrefab: {fileID: 6031563233228395236, guid: aa07322dd54452f4086bb3cfe45ddd57,
+    type: 3}
+  arTrackedImageManager: {fileID: 408664552}
 --- !u!1 &425410336
 GameObject:
   m_ObjectHideFlags: 0
