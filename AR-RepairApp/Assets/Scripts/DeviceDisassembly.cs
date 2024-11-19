@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.XR.ARFoundation;
 
 public class DeviceDisassembly : MonoBehaviour
 {
@@ -17,13 +18,22 @@ public class DeviceDisassembly : MonoBehaviour
 
     public Button leftButton;
     public Button rightButton;
-    public Animator animator;
+
+    // Prefabs for each state did this because im done with the animation controller and it sort of works but not really so im about to make the whole project dependant on a coconut picture
+    public GameObject idlePrefab;
+    public GameObject screwsOutPrefab;
+    public GameObject capOffPrefab;
+    public GameObject batteryOutPrefab;
+    public GameObject ramOutPrefab;
+    public GameObject ssdOutPrefab;
+
+    public ARTrackedImageManager arTrackedImageManager;
 
     void Start()
     {
         leftButton.onClick.AddListener(() => MoveToPreviousState());
         rightButton.onClick.AddListener(() => MoveToNextState());
-        
+
         UpdateButtons();
     }
 
@@ -32,27 +42,26 @@ public class DeviceDisassembly : MonoBehaviour
         switch (currentState)
         {
             case DisassemblyState.Idle:
-                ChangeState(DisassemblyState.ScrewsOut, "ScrewsOut");
+                ChangeState(DisassemblyState.ScrewsOut, screwsOutPrefab);
                 break;
 
             case DisassemblyState.ScrewsOut:
-                ChangeState(DisassemblyState.CapOff, "CapOff");
+                ChangeState(DisassemblyState.CapOff, capOffPrefab);
                 break;
 
             case DisassemblyState.CapOff:
-                ChangeState(DisassemblyState.BatteryOut, "BatteryOut");
+                ChangeState(DisassemblyState.BatteryOut, batteryOutPrefab);
                 break;
 
             case DisassemblyState.BatteryOut:
-                ChangeState(DisassemblyState.RamOut, "RamOut");
+                ChangeState(DisassemblyState.RamOut, ramOutPrefab);
                 break;
 
             case DisassemblyState.RamOut:
-                ChangeState(DisassemblyState.SSDOut, "SsdOut");
+                ChangeState(DisassemblyState.SSDOut, ssdOutPrefab);
                 break;
 
             case DisassemblyState.SSDOut:
-                // Optional: Loop back to Idle or disable the right button.
                 break;
         }
     }
@@ -62,42 +71,59 @@ public class DeviceDisassembly : MonoBehaviour
         switch (currentState)
         {
             case DisassemblyState.ScrewsOut:
-                ChangeState(DisassemblyState.Idle, "ScrewsIn");
+                ChangeState(DisassemblyState.Idle, idlePrefab);
                 break;
 
             case DisassemblyState.CapOff:
-                ChangeState(DisassemblyState.ScrewsOut, "CapIn");
+                ChangeState(DisassemblyState.ScrewsOut, screwsOutPrefab);
                 break;
 
             case DisassemblyState.BatteryOut:
-                ChangeState(DisassemblyState.CapOff, "BatteryIn");
+                ChangeState(DisassemblyState.CapOff, capOffPrefab);
                 break;
 
             case DisassemblyState.RamOut:
-                ChangeState(DisassemblyState.BatteryOut, "RamIn");
+                ChangeState(DisassemblyState.BatteryOut, batteryOutPrefab);
                 break;
 
             case DisassemblyState.SSDOut:
-                ChangeState(DisassemblyState.RamOut, "SsdIn");
+                ChangeState(DisassemblyState.RamOut, ramOutPrefab);
                 break;
 
             case DisassemblyState.Idle:
-                // Optional: Loop back to SSDOut or disable the left button.
                 break;
         }
     }
 
-    void ChangeState(DisassemblyState newState, string trigger)
+    void ChangeState(DisassemblyState newState, GameObject newPrefab)
     {
         currentState = newState;
-        animator.SetTrigger(trigger);
+        ReplaceTrackedImagePrefab(newPrefab);
         UpdateButtons();
     }
 
-    // Function to update the buttons' states based on the current phase
+
+    void ReplaceTrackedImagePrefab(GameObject newPrefab)
+    {
+        // Iterate through all tracked images
+        foreach (var trackedImage in arTrackedImageManager.trackables)
+        {
+            // Destroy existing child objects (if any)
+            foreach (Transform child in trackedImage.transform)
+            {
+                Destroy(child.gameObject);
+            }
+
+            // Instantiate the new prefab as a child of the tracked image
+            GameObject newInstance = Instantiate(newPrefab, trackedImage.transform);
+            newInstance.transform.localPosition = Vector3.zero;
+            newInstance.transform.localRotation = Quaternion.identity;
+            newInstance.transform.localScale = new Vector3(1f, 1f, 1f);
+        }
+    }
+
     void UpdateButtons()
     {
-        // Enable or disable left/right buttons based on the current state
         leftButton.interactable = currentState != DisassemblyState.Idle;
         rightButton.interactable = currentState != DisassemblyState.SSDOut;
     }
