@@ -1,13 +1,12 @@
 using UnityEngine;
 
-public class BlinkingEffect : MonoBehaviour
+public class ModularBlinkingEffect : MonoBehaviour
 {
-    public Transform parent; // The parent whose children will blink
-    public Color blinkColor = Color.red; // Color to blink to
-    public float blinkInterval = 0.5f; // Time between color switches
+    public Transform parent; 
+    public Color blinkColor = Color.red; 
+    public float blinkInterval = 0.5f; 
 
-    private bool isBlinking = false;
-    private Renderer[] childRenderers;
+    private Renderer[] allRenderers; 
     private Color[] originalColors;
 
     void Start()
@@ -17,50 +16,30 @@ public class BlinkingEffect : MonoBehaviour
             parent = transform;
         }
 
-        childRenderers = parent.GetComponentsInChildren<Renderer>();
-        originalColors = new Color[childRenderers.Length];
+        allRenderers = parent.GetComponentsInChildren<Renderer>(includeInactive: true);
+        originalColors = new Color[allRenderers.Length];
 
-        for (int i = 0; i < childRenderers.Length; i++)
+        for (int i = 0; i < allRenderers.Length; i++)
         {
-            originalColors[i] = childRenderers[i].material.color;
+            originalColors[i] = allRenderers[i].material.color;
         }
+
+        InvokeRepeating(nameof(Blink), 0f, blinkInterval);
     }
 
-    public void StartBlinking()
+    void OnDestroy()
     {
-        if (!isBlinking)
-        {
-            isBlinking = true;
-            InvokeRepeating(nameof(Blink), 0f, blinkInterval);
-        }
-    }
-
-    public void StopBlinking()
-    {
-        if (isBlinking)
-        {
-            isBlinking = false;
-            CancelInvoke(nameof(Blink));
-
-            // Reset all child renderers to their original colors
-            for (int i = 0; i < childRenderers.Length; i++)
-            {
-                if (childRenderers[i] != null)
-                {
-                    childRenderers[i].material.color = originalColors[i];
-                }
-            }
-        }
+        CancelInvoke(nameof(Blink));
     }
 
     private void Blink()
     {
-        for (int i = 0; i < childRenderers.Length; i++)
+        for (int i = 0; i < allRenderers.Length; i++)
         {
-            if (childRenderers[i] != null)
+            if (allRenderers[i] != null)
             {
-                childRenderers[i].material.color = 
-                    childRenderers[i].material.color == originalColors[i] ? blinkColor : originalColors[i];
+                allRenderers[i].material.color = 
+                    allRenderers[i].material.color == originalColors[i] ? blinkColor : originalColors[i];
             }
         }
     }
