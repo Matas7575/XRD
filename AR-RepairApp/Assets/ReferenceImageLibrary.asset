@@ -21,9 +21,39 @@ MonoBehaviour:
       m_GuidLow: 5054982395392097953
       m_GuidHigh: 12820157958065029803
     m_SerializedTextureGuid:
-      m_GuidLow: 11825548278270145104
-      m_GuidHigh: 17580526944530444251
+      m_GuidLow: 16610633900315235860
+      m_GuidHigh: 11667170742479169288
     m_Size: {x: 0.01, y: 0.009989095}
     m_SpecifySize: 1
     m_Name: QRCode
+    m_Texture: {fileID: 0}
+  - m_SerializedGuid:
+      m_GuidLow: 4696812861076851879
+      m_GuidHigh: 2349264724843320763
+    m_SerializedTextureGuid:
+      m_GuidLow: 16970781704972063586
+      m_GuidHigh: 8269372591739702888
+    m_Size: {x: 0, y: 0}
+    m_SpecifySize: 0
+    m_Name: 2
+    m_Texture: {fileID: 0}
+  - m_SerializedGuid:
+      m_GuidLow: 5094749334940815162
+      m_GuidHigh: 15750678462058956460
+    m_SerializedTextureGuid:
+      m_GuidLow: 9675114169354959544
+      m_GuidHigh: 11175698277189199352
+    m_Size: {x: 0, y: 0}
+    m_SpecifySize: 0
+    m_Name: Sticker3
+    m_Texture: {fileID: 0}
+  - m_SerializedGuid:
+      m_GuidLow: 5595887129667400825
+      m_GuidHigh: 8722065870493467281
+    m_SerializedTextureGuid:
+      m_GuidLow: 16236629766569979551
+      m_GuidHigh: 14174797129858961499
+    m_Size: {x: 0, y: 0}
+    m_SpecifySize: 0
+    m_Name: Sticker4
     m_Texture: {fileID: 0}
