@@ -104,23 +104,21 @@ public class DeviceDisassembly : MonoBehaviour
 
 
     void ReplaceTrackedImagePrefab(GameObject newPrefab)
+{
+    foreach (var trackedImage in arTrackedImageManager.trackables)
     {
-        // Iterate through all tracked images
-        foreach (var trackedImage in arTrackedImageManager.trackables)
+        foreach (Transform child in trackedImage.transform)
         {
-            // Destroy existing child objects (if any)
-            foreach (Transform child in trackedImage.transform)
-            {
-                Destroy(child.gameObject);
-            }
-
-            // Instantiate the new prefab as a child of the tracked image
-            GameObject newInstance = Instantiate(newPrefab, trackedImage.transform);
-            newInstance.transform.localPosition = Vector3.zero;
-            newInstance.transform.localRotation = Quaternion.identity;
-            newInstance.transform.localScale = new Vector3(1f, 1f, 1f);
+            Destroy(child.gameObject);
         }
+
+        GameObject newInstance = Instantiate(newPrefab, trackedImage.transform);
+
+        HoverOffset hoverOffset = newInstance.AddComponent<HoverOffset>();
+        hoverOffset.hoverHeight = 0.1f; 
     }
+}
+
 
     void UpdateButtons()
     {
